@@ -1,0 +1,72 @@
+version: 2
+
+models:
+  - name: stg_interaction
+    description: >
+      Cleaned and typed user-video exposure events from the source.
+      One row per interaction event. Boolean flags indicate actions taken during the session.
+      User demographic fields are preserved here for segmentation but are stripped
+      in the downstream fct_interaction to keep the fact table lean.
+    columns:
+      - name: user_id
+        description: Unique identifier for the user.
+        data_tests:
+          - not_null
+      - name: video_id
+        description: Unique identifier for the video (source column: pid).
+        data_tests:
+          - not_null
+      - name: author_id
+        description: Unique identifier for the video author.
+      - name: category_id
+        description: Category ID associated with the video at time of interaction.
+      - name: category_level
+        description: Hierarchy level of the category (1=root, 2=parent, 3=leaf).
+      - name: parent_id
+        description: Parent category ID.
+      - name: root_id
+        description: Root category ID.
+      - name: exposed_at
+        description: Timestamp when the user was exposed to the video (converted from Unix epoch).
+      - name: p_hour
+        description: Hour of day the interaction was recorded.
+      - name: p_date
+        description: Date the interaction was recorded (converted from YYYYMMDD integer).
+      - name: watch_time_seconds
+        description: Total seconds the user watched the video in this session.
+      - name: duration_seconds
+        description: Total duration of the video in seconds.
+      - name: title
+        description: Title of the video.
+      - name: tag_name
+        description: Tag associated with the video.
+      - name: author_fans_count
+        description: Number of fans the author had at the time of this interaction.
+      - name: is_liked
+        description: True if the user liked the video (source column: cvm_like).
+      - name: is_clicked
+        description: True if the user clicked on the video (source column: click).
+      - name: is_commented
+        description: True if the user commented on the video (source column: comment).
+      - name: is_followed
+        description: True if the user followed the author during this session (source column: follow).
+      - name: is_collected
+        description: True if the user saved/collected the video (source column: collect).
+      - name: is_forwarded
+        description: True if the user shared/forwarded the video (source column: forward).
+      - name: is_hated
+        description: True if the user disliked the video (source column: hate).
+      - name: gender
+        description: Gender of the user.
+      - name: age
+        description: Age of the user.
+      - name: mod_price
+        description: Modeled price segment of the user.
+      - name: fre_city
+        description: Most frequent city of the user.
+      - name: fre_community_type
+        description: Most frequent community type of the user.
+      - name: fre_city_level
+        description: City tier classification (e.g. 一线城市, 三线城市).
+      - name: is_effective_view
+        description: True if watch_time_seconds > 3, indicating the user genuinely engaged with the video.

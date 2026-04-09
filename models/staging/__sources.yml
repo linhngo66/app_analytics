@@ -1,0 +1,15 @@
+version: 2
+
+sources:
+  - name: source
+    database: app_analytics
+    schema: source
+    tables:
+      - name: interaction
+        description: >
+          Raw user-video exposure events. One row per time a user was shown a video.
+          Boolean flags record any actions taken during that session (like, comment, share, etc.).
+      - name: categories_cn_en
+        description: >
+          Category reference table with three-level hierarchy (root → parent → leaf).
+          Includes both Chinese and English names.

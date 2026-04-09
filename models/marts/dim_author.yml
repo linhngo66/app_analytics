@@ -1,0 +1,15 @@
+version: 2
+
+models:
+  - name: dim_author
+    description: >
+      Author dimension derived from interaction events. One row per author.
+      Fan count is taken from the most recent interaction record for that author.
+    columns:
+      - name: author_id
+        description: Unique identifier for the author.
+        data_tests:
+          - not_null
+          - unique
+      - name: author_fans_count
+        description: Number of fans the author had at the time of their most recent interaction in the dataset.

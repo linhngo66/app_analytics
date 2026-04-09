@@ -1,0 +1,39 @@
+version: 2
+
+models:
+  - name: fct_user_engagement
+    description: >
+      User-level engagement metrics aggregated from fct_interaction.
+      One row per user. Useful for understanding engagement patterns across
+      user segments — combine with user demographic fields from stg_interaction
+      for cohort and segmentation analysis.
+    columns:
+      - name: user_id
+        description: Unique identifier for the user.
+        data_tests:
+          - not_null
+          - unique
+      - name: views
+        description: Total number of videos this user was exposed to.
+      - name: effective_views
+        description: Views where the user watched more than 3 seconds.
+      - name: total_watch_time
+        description: Sum of watch_time_seconds across all of this user's views.
+      - name: likes
+        description: Number of videos this user liked.
+      - name: comments
+        description: Number of videos this user commented on.
+      - name: shares
+        description: Number of videos this user forwarded/shared.
+      - name: follows
+        description: Number of authors this user followed via video interaction.
+      - name: collects
+        description: Number of videos this user saved/collected.
+      - name: hates
+        description: Number of videos this user disliked.
+      - name: total_engagements
+        description: likes + comments + shares + follows + collects + hates.
+      - name: engagement_rate
+        description: total_engagements / views — overall engagement intensity for this user.
+      - name: avg_watch_time_per_view
+        description: total_watch_time / views — average depth of viewing per session for this user.

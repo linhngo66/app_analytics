@@ -1,0 +1,28 @@
+version: 2
+
+models:
+  - name: dim_video
+    description: >
+      Video dimension derived from interaction events. One row per video.
+      Attributes are taken from the most recent interaction record for that video.
+      Join to fct_video_engagement on video_id to enrich with title and duration.
+    columns:
+      - name: video_id
+        description: Unique identifier for the video.
+        data_tests:
+          - not_null
+          - unique
+      - name: author_id
+        description: Author of the video.
+      - name: category_id
+        description: Category ID of the video.
+      - name: category_level
+        description: Hierarchy level of the category.
+      - name: parent_id
+        description: Parent category ID.
+      - name: root_id
+        description: Root category ID.
+      - name: duration_seconds
+        description: Duration of the video in seconds.
+      - name: title
+        description: Title of the video.

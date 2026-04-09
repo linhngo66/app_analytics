@@ -1,0 +1,57 @@
+version: 2
+
+models:
+  - name: fct_video_engagement
+    description: >
+      Video-level engagement metrics aggregated from fct_interaction.
+      One row per video. The primary model for answering "what makes a video engaging?"
+      Contains all volume, interaction, and rate metrics from the PRD.
+      Join to dim_video for title/duration and dim_category for category hierarchy.
+    columns:
+      - name: video_id
+        description: Unique identifier for the video.
+        data_tests:
+          - not_null
+          - unique
+      - name: author_id
+        description: Author of the video.
+      - name: category_id
+        description: Category of the video.
+      - name: category_level
+        description: Hierarchy level of the category.
+      - name: parent_id
+        description: Parent category ID.
+      - name: root_id
+        description: Root category ID.
+      - name: views
+        description: Total number of exposure events for this video.
+      - name: effective_views
+        description: Views where the user watched more than 3 seconds.
+      - name: total_watch_time
+        description: Sum of watch_time_seconds across all views.
+      - name: likes
+        description: Count of interactions where the user liked the video.
+      - name: comments
+        description: Count of interactions where the user commented.
+      - name: shares
+        description: Count of interactions where the user forwarded/shared the video.
+      - name: follows
+        description: Count of interactions where the user followed the author.
+      - name: collects
+        description: Count of interactions where the user saved/collected the video.
+      - name: hates
+        description: Count of interactions where the user disliked the video.
+      - name: total_engagements
+        description: likes + comments + shares + follows + collects + hates.
+      - name: engagement_rate
+        description: total_engagements / views — share of views that resulted in any engagement action.
+      - name: effective_view_rate
+        description: effective_views / views — share of views that lasted more than 3 seconds.
+      - name: avg_watch_time_per_view
+        description: total_watch_time / views — average seconds watched per view.
+      - name: like_rate
+        description: likes / views.
+      - name: comment_rate
+        description: comments / views.
+      - name: share_rate
+        description: shares / views.

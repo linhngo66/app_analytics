@@ -1,0 +1,25 @@
+version: 2
+
+models:
+  - name: stg_category
+    description: >
+      Cleaned category reference data with Chinese and English names.
+      Preserves the three-level hierarchy: root (level 1) → parent (level 2) → leaf (level 3).
+      Column names use level suffixes (category1, category2, category3) to make the
+      hierarchy explicit for downstream joins.
+    columns:
+      - name: category3_id
+        description: Leaf-level category identifier (source column: category_id).
+        data_tests:
+          - not_null
+          - unique
+      - name: category_name_cn
+        description: Category name in Chinese.
+      - name: category_name_en
+        description: Category name in English.
+      - name: category_level
+        description: Hierarchy level of this category row (1=root, 2=parent, 3=leaf).
+      - name: category2_id
+        description: Parent category ID — one level above category3_id (source column: parent_id).
+      - name: category1_id
+        description: Root category ID — top of the hierarchy (source column: root_id).

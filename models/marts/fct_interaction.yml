@@ -1,0 +1,52 @@
+version: 2
+
+models:
+  - name: fct_interaction
+    description: >
+      Atomic fact table for user-video interactions. One row per exposure event.
+      Contains cleaned keys and interaction flags ready for downstream aggregation.
+      User demographic fields are intentionally excluded; join back to stg_interaction
+      when segmentation by gender, age, city, etc. is needed.
+    columns:
+      - name: user_id
+        description: Unique identifier for the user.
+        data_tests:
+          - not_null
+      - name: video_id
+        description: Unique identifier for the video.
+        data_tests:
+          - not_null
+      - name: author_id
+        description: Unique identifier for the video's author.
+      - name: category_id
+        description: Category ID of the video at time of interaction.
+      - name: category_level
+        description: Hierarchy level of the category (1=root, 2=parent, 3=leaf).
+      - name: parent_id
+        description: Parent category ID.
+      - name: root_id
+        description: Root category ID.
+      - name: exposed_at
+        description: Timestamp when the user was exposed to the video.
+      - name: watch_time_seconds
+        description: Seconds watched by the user in this interaction.
+      - name: is_effective_view
+        description: True if watch_time_seconds > 3.
+      - name: is_liked
+        description: True if the user liked the video.
+      - name: is_clicked
+        description: True if the user clicked on the video.
+      - name: is_commented
+        description: True if the user commented on the video.
+      - name: is_followed
+        description: True if the user followed the author.
+      - name: is_collected
+        description: True if the user saved/collected the video.
+      - name: is_forwarded
+        description: True if the user shared/forwarded the video.
+      - name: is_hated
+        description: True if the user disliked the video.
+      - name: p_hour
+        description: Hour of day the interaction occurred.
+      - name: p_date
+        description: Date the interaction occurred.
