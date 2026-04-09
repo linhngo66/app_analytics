@@ -7,10 +7,10 @@ deduped as (
     select
         video_id,
         author_id,
-        category_id,
         category_level,
-        parent_id,
-        root_id,
+        category1_id,
+        category2_id,
+        category3_id,
         duration_seconds,
         title,
         row_number() over (
@@ -23,10 +23,10 @@ deduped as (
 select
     video_id,
     author_id,
-    category_id,
     category_level,
-    parent_id,
-    root_id,
+    category1_id,
+    category2_id,
+    category3_id,
     duration_seconds,
     title
 from deduped

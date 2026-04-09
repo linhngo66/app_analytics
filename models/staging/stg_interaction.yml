@@ -13,7 +13,7 @@ models:
         data_tests:
           - not_null
       - name: video_id
-        description: Unique identifier for the video (source column: pid).
+        description: Unique identifier for the video.
         data_tests:
           - not_null
       - name: author_id
@@ -43,19 +43,19 @@ models:
       - name: author_fans_count
         description: Number of fans the author had at the time of this interaction.
       - name: is_liked
-        description: True if the user liked the video (source column: cvm_like).
+        description: True if the user liked the video.
       - name: is_clicked
-        description: True if the user clicked on the video (source column: click).
+        description: True if the user clicked on the video.
       - name: is_commented
-        description: True if the user commented on the video (source column: comment).
+        description: True if the user commented on the video.
       - name: is_followed
-        description: True if the user followed the author during this session (source column: follow).
+        description: True if the user followed the author during this session.
       - name: is_collected
-        description: True if the user saved/collected the video (source column: collect).
+        description: True if the user saved/collected the video.
       - name: is_forwarded
-        description: True if the user shared/forwarded the video (source column: forward).
+        description: True if the user shared/forwarded the video.
       - name: is_hated
-        description: True if the user disliked the video (source column: hate).
+        description: True if the user disliked the video.
       - name: gender
         description: Gender of the user.
       - name: age

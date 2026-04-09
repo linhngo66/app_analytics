@@ -15,14 +15,14 @@ models:
           - unique
       - name: author_id
         description: Author of the video.
-      - name: category_id
-        description: Category of the video.
-      - name: category_level
-        description: Hierarchy level of the category.
-      - name: parent_id
-        description: Parent category ID.
-      - name: root_id
-        description: Root category ID.
+      - name: category3_id
+        description: Leaf-level category FK — join to dim_category on category3_id for full hierarchy.
+      - name: category3_name
+        description: Leaf-level category name in English.
+      - name: category2_name
+        description: Parent category name in English.
+      - name: category1_name
+        description: Root category name in English.
       - name: views
         description: Total number of exposure events for this video.
       - name: effective_views

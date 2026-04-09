@@ -7,11 +7,13 @@ models:
       Use category_id to join from fact tables; use parent_id and root_id to roll up
       to broader category groups for analysis.
     columns:
-      - name: category_id
-        description: Leaf-level category identifier.
+      - name: category_sk
+        description: Surrogate key for the category, generated from category3_id.
         data_tests:
           - not_null
           - unique
+      - name: category3_id
+        description: Leaf-level category natural key.
       - name: category_name_en
         description: Category name in English.
       - name: category_name_cn

@@ -3,10 +3,11 @@ with stg_category as (
 )
 
 select
-    category3_id as category_id,
-    category_name_en,
-    category_name_cn,
+    category_sk,
     category_level,
-    category2_id as parent_id,
-    category1_id as root_id
+    category1_id,
+    category2_id,
+    category3_id,
+    category_name_cn,
+    category_name_en
 from stg_category

@@ -2,29 +2,28 @@ with fct_interaction as (
     select * from {{ ref('fct_interaction') }}
 ),
 
+dim_category as (
+    select * from {{ ref('dim_category') }}
+),
+
 aggregated as (
     select
         video_id,
-
-        -- carry through video-level attributes (constant per video)
-        any_value(author_id)        as author_id,
-        any_value(category_id)      as category_id,
-        any_value(category_level)   as category_level,
-        any_value(parent_id)        as parent_id,
-        any_value(root_id)          as root_id,
+        any_value(author_id) as author_id,
+        any_value(category3_id) as category3_id,
 
         -- volume metrics
-        count(*)                    as views,
+        count(*) as views,
         count_if(is_effective_view) as effective_views,
-        sum(watch_time_seconds)     as total_watch_time,
+        sum(watch_time_seconds) as total_watch_time,
 
         -- interaction counts
-        count_if(is_liked)          as likes,
-        count_if(is_commented)      as comments,
-        count_if(is_forwarded)      as shares,
-        count_if(is_followed)       as follows,
-        count_if(is_collected)      as collects,
-        count_if(is_hated)          as hates
+        count_if(is_liked) as likes,
+        count_if(is_commented) as comments,
+        count_if(is_forwarded) as shares,
+        count_if(is_followed) as follows,
+        count_if(is_collected) as collects,
+        count_if(is_hated) as hates
 
     from fct_interaction
     group by video_id
@@ -41,12 +40,42 @@ with_rates as (
     select
         *,
         div0(total_engagements, views) as engagement_rate,
-        div0(effective_views, views)   as effective_view_rate,
-        div0(total_watch_time, views)  as avg_watch_time_per_view,
-        div0(likes, views)             as like_rate,
-        div0(comments, views)          as comment_rate,
-        div0(shares, views)            as share_rate
+        div0(effective_views, views) as effective_view_rate,
+        div0(total_watch_time, views) as avg_watch_time_per_view,
+        div0(likes, views) as like_rate,
+        div0(comments, views) as comment_rate,
+        div0(shares, views) as share_rate
     from with_engagements
+),
+
+final as (
+    select
+        r.video_id,
+        r.author_id,
+        r.category3_id,
+        dc3.category_name_en as category3_name,
+        dc2.category_name_en as category2_name,
+        dc1.category_name_en as category1_name,
+        r.views,
+        r.effective_views,
+        r.total_watch_time,
+        r.likes,
+        r.comments,
+        r.shares,
+        r.follows,
+        r.collects,
+        r.hates,
+        r.total_engagements,
+        r.engagement_rate,
+        r.effective_view_rate,
+        r.avg_watch_time_per_view,
+        r.like_rate,
+        r.comment_rate,
+        r.share_rate
+    from with_rates r
+    left join dim_category dc3 on r.category3_id = dc3.category3_id
+    left join dim_category dc2 on dc3.category2_id = dc2.category3_id
+    left join dim_category dc1 on dc3.category1_id = dc1.category3_id
 )
 
-select * from with_rates
+select * from final
