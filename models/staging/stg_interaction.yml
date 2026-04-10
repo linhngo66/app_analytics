@@ -92,5 +92,10 @@ models:
         description: Most frequent community type of the user.
       - name: fre_city_level
         description: City tier classification (e.g. 一线城市, 三线城市).
+      - name: effective_view_count
+        description: >
+          Number of effective views in this interaction — full replays always count;
+          the last partial view counts if its remainder exceeds 3 seconds.
+          Computed by the effective_view_count macro.
       - name: is_effective_view
         description: True if watch_time_seconds > 3, indicating the user genuinely engaged with the video.

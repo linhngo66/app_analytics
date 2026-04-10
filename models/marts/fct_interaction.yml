@@ -25,6 +25,11 @@ models:
         description: Seconds watched by the user in this interaction.
       - name: is_effective_view
         description: True if watch_time_seconds > 3.
+      - name: effective_view_count
+        description: >
+          Number of effective views in this interaction — full replays plus last partial
+          view if remainder > 3s. Use sum(effective_view_count) in aggregations instead
+          of count_if(is_effective_view).
       - name: is_liked
         description: True if the user liked the video.
       - name: is_clicked
