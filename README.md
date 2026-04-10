@@ -1,1 +1,5 @@
-user_id	pid	author_id	category_id	category_level	parent_id	root_id	exposed_time	author_fans_count	watch_time	duration	cvm_like	click	comment	follow	collect	forward	hate	tag_name	title	p_hour	p_date	gender	age	mod_price	fre_city	fre_community_type	fre_city_level
+Interesting resources & ref for the project:
+
+1. How I modelled hierarchy: <https://towardsdatascience.com/handling-hierarchies-in-dimensional-modeling-176156f20f61/>
+2. dbt MCP
+3. dbt agent skill

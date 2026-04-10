@@ -1,5 +1,3 @@
-{{ config(static_analysis='unsafe') }}
-
 with src as (
     select * from {{ source('source', 'categories_cn_en') }}
 ),

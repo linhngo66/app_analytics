@@ -13,3 +13,5 @@ models:
           - unique
       - name: author_fans_count
         description: Number of fans the author had at the time of their most recent interaction in the dataset.
+      - name: updated_at
+        description: Timestamp of the most recent interaction event used to derive this author's fan count.

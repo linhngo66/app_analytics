@@ -3,10 +3,8 @@ version: 2
 models:
   - name: fct_user_engagement
     description: >
-      User-level engagement metrics aggregated from fct_interaction.
-      One row per user. Useful for understanding engagement patterns across
-      user segments — combine with user demographic fields from stg_interaction
-      for cohort and segmentation analysis.
+      User-level engagement metrics aggregated from fct_interaction, enriched with
+      demographic attributes from dim_user. One row per user.
     columns:
       - name: user_id
         description: Unique identifier for the user.
@@ -37,3 +35,17 @@ models:
         description: total_engagements / views — overall engagement intensity for this user.
       - name: avg_watch_time_per_view
         description: total_watch_time / views — average depth of viewing per session for this user.
+      - name: gender
+        description: Gender of the user.
+      - name: age
+        description: Age of the user.
+      - name: mod_price
+        description: Modeled price segment of the user.
+      - name: fre_city
+        description: Most frequent city of the user.
+      - name: fre_community_type
+        description: Most frequent community type of the user.
+      - name: fre_city_level
+        description: City tier classification (e.g. 一线城市, 三线城市).
+      - name: last_active_at
+        description: Timestamp of the user's most recent interaction event.

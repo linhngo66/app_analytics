@@ -21,5 +21,7 @@ models:
         description: Parent category ID — one level above category3_id.
       - name: category3_id
         description: Leaf-level category natural key.
+      - name: category_name_cn
+        description: Category name in Chinese — always correct; use as ground truth when category_name_en is suspect.
       - name: category_name_en
         description: Category name in English.
