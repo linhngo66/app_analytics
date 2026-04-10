@@ -11,8 +11,8 @@ aggregated as (
         user_id,
 
         -- volume metrics
-        count(*)                    as views,
-        count_if(is_effective_view) as effective_views,
+        count(*)                    as video_counts,
+        sum(effective_view_count) as effective_views,
         sum(watch_time_seconds)     as total_watch_time,
 
         -- interaction counts
@@ -37,8 +37,8 @@ with_engagements as (
 with_rates as (
     select
         *,
-        div0(total_engagements, views) as engagement_rate,
-        div0(total_watch_time, views)  as avg_watch_time_per_view
+        div0(total_engagements, video_counts) as engagement_rate,
+        div0(total_watch_time, video_counts)  as avg_watch_time_per_view
     from with_engagements
 ),
 

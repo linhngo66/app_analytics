@@ -9,6 +9,27 @@ sources:
         description: >
           Raw user-video exposure events. One row per time a user was shown a video.
           Boolean flags record any actions taken during that session (like, comment, share, etc.).
+        columns:
+          - name: age
+            quote: true
+            data_tests:
+              - not_null
+          - name: mod_price
+            quote: true
+            data_tests:
+              - not_null
+          - name: author_fans_count
+            quote: true
+            data_tests:
+              - not_null
+          - name: watch_time
+            quote: true
+            data_tests:
+              - not_null
+          - name: duration
+            quote: true
+            data_tests:
+              - not_null
       - name: categories_cn_en
         description: >
           Category reference table with three-level hierarchy (root → parent → leaf).
@@ -17,3 +38,16 @@ sources:
           have duplicate rows with conflicting category_name_en values. The Chinese name
           (category_name_cn) is always correct. A defensive dedup is applied in stg_category
           pending a fix at the source.
+        columns:
+          - name: category_id
+            quote: true
+            data_tests:
+              - not_null
+          - name: root_id
+            quote: true
+            data_tests:
+              - not_null
+          - name: parent_id
+            quote: true
+            data_tests:
+              - not_null

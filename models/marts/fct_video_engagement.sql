@@ -14,7 +14,7 @@ aggregated as (
 
         -- volume metrics
         count(*) as views,
-        count_if(is_effective_view) as effective_views,
+        sum(effective_view_count) as effective_views,
         sum(watch_time_seconds) as total_watch_time,
 
         -- interaction counts

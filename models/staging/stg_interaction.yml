@@ -38,14 +38,26 @@ models:
         description: Date the interaction was recorded (converted from YYYYMMDD integer).
       - name: watch_time_seconds
         description: Total seconds the user watched the video in this session.
+        data_tests:
+          - dbt_utils.expression_is_true:
+              arguments:
+                expression: ">= 0"
       - name: duration_seconds
         description: Total duration of the video in seconds.
+        data_tests:
+          - dbt_utils.expression_is_true:
+              arguments:
+                expression: "> 0"
       - name: title
         description: Title of the video.
       - name: tag_name
         description: Tag associated with the video.
       - name: author_fans_count
         description: Number of fans the author had at the time of this interaction.
+        data_tests:
+          - dbt_utils.expression_is_true:
+              arguments:
+                expression: ">= 0"
       - name: is_liked
         description: True if the user liked the video.
       - name: is_clicked
@@ -64,8 +76,16 @@ models:
         description: Gender of the user.
       - name: age
         description: Age of the user.
+        data_tests:
+          - dbt_utils.expression_is_true:
+              arguments:
+                expression: "> 0"
       - name: mod_price
         description: Modeled price segment of the user.
+        data_tests:
+          - dbt_utils.expression_is_true:
+              arguments:
+                expression: "> 0"
       - name: fre_city
         description: Most frequent city of the user.
       - name: fre_community_type

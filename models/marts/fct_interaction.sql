@@ -17,6 +17,7 @@ select
     -- watch metrics
     watch_time_seconds,
     is_effective_view,
+    effective_view_count,
 
     -- interaction flags
     is_liked,

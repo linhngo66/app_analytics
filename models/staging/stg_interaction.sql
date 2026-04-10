@@ -53,6 +53,8 @@ renamed as (
 with_category_sk as (
     select
         *,
+        -- effective view count — full plays always count; last partial play counts if remainder > 3s
+        {{ effective_view_count('watch_time_seconds', 'duration_seconds') }} as effective_view_count,
         concat(
             coalesce(category1_id, 0),
             coalesce(category2_id, 0),

@@ -15,12 +15,20 @@ models:
           - unique
       - name: category_level
         description: Hierarchy level of this category row (1=root, 2=parent, 3=leaf).
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: [1, 2, 3]
       - name: category1_id
         description: Root category ID — top of the hierarchy.
+        data_tests:
+          - not_null
       - name: category2_id
         description: Parent category ID — one level above category3_id.
       - name: category3_id
         description: Leaf-level category natural key.
+        data_tests:
+          - not_null
       - name: category_name_cn
         description: Category name in Chinese — always correct; use as ground truth when category_name_en is suspect.
       - name: category_name_en

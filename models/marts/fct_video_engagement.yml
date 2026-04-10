@@ -25,8 +25,14 @@ models:
         description: Root category name in English.
       - name: views
         description: Total number of exposure events for this video.
+        data_tests:
+          - dbt_utils.expression_is_true:
+              arguments:
+                expression: "> 0"
       - name: effective_views
-        description: Views where the user watched more than 3 seconds.
+        description: >
+          Sum of effective_view_count across all interactions — counts full replays plus
+          any final partial view that lasted more than 3 seconds.
       - name: total_watch_time
         description: Sum of watch_time_seconds across all views.
       - name: likes
@@ -45,8 +51,18 @@ models:
         description: likes + comments + shares + follows + collects + hates.
       - name: engagement_rate
         description: total_engagements / views — share of views that resulted in any engagement action.
+        data_tests:
+          - dbt_utils.expression_is_true:
+              arguments:
+                expression: ">= 0"
       - name: effective_view_rate
-        description: effective_views / views — share of views that lasted more than 3 seconds.
+        description: >
+          effective_views / views — average number of effective views per exposure.
+          Can exceed 1 when users replay the video multiple times in a session.
+        data_tests:
+          - dbt_utils.expression_is_true:
+              arguments:
+                expression: ">= 0"
       - name: avg_watch_time_per_view
         description: total_watch_time / views — average seconds watched per view.
       - name: like_rate

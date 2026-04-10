@@ -15,6 +15,7 @@ level2_names as (
 unioned as (
     -- Level 1: only root name
     select
+        repeat(category1_id, 3) as category_sk,
         category_level,
         category1_id,
         category_name_en  as category1_name_en,
@@ -28,6 +29,9 @@ unioned as (
 
     -- Level 2: root + self names
     select
+        concat(
+            repeat(sc.category1_id, 2),
+            sc.category3_id) as category_sk,
         sc.category_level,
         sc.category1_id,
         l1.category1_name_en,
@@ -43,6 +47,10 @@ unioned as (
 
     -- Level 3: all three levels resolved
     select
+        concat(
+            coalesce(sc.category1_id, 0),
+            coalesce(sc.category2_id, 0),
+            coalesce(sc.category3_id, 0)) as category_sk,
         sc.category_level,
         sc.category1_id,
         l1.category1_name_en,
@@ -58,10 +66,7 @@ unioned as (
 
 final as (
     select
-        concat(
-            coalesce(category1_id, 0),
-            coalesce(category2_id, 0),
-            coalesce(category3_id, 0)) as category_sk,
+        category_sk,
         category_level,
         category1_id,
         category1_name_en,
