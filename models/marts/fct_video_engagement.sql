@@ -10,7 +10,7 @@ aggregated as (
     select
         video_id,
         any_value(author_id) as author_id,
-        any_value(category3_id) as category3_id,
+        any_value(category_sk) as category_sk,
 
         -- volume metrics
         count(*) as views,
@@ -52,10 +52,10 @@ final as (
     select
         r.video_id,
         r.author_id,
-        r.category3_id,
-        dc3.category_name_en as category3_name,
-        dc2.category_name_en as category2_name,
-        dc1.category_name_en as category1_name,
+        r.category_sk,
+        dc.category1_name_en as category1_name,
+        dc.category2_name_en as category2_name,
+        dc.category3_name_en as category3_name,
         r.views,
         r.effective_views,
         r.total_watch_time,
@@ -73,9 +73,7 @@ final as (
         r.comment_rate,
         r.share_rate
     from with_rates r
-    left join dim_category dc3 on r.category3_id = dc3.category3_id
-    left join dim_category dc2 on dc3.category2_id = dc2.category3_id
-    left join dim_category dc1 on dc3.category1_id = dc1.category3_id
+    left join dim_category dc on r.category_sk = dc.category_sk
 )
 
 select * from final

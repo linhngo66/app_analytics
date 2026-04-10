@@ -7,7 +7,7 @@ select
     user_id,
     video_id,
     author_id,
-    category3_id,
+    category_sk,
 
     -- timestamps
     exposed_at,

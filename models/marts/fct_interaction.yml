@@ -5,8 +5,7 @@ models:
     description: >
       Atomic fact table for user-video interactions. One row per exposure event.
       Contains cleaned keys and interaction flags ready for downstream aggregation.
-      User demographic fields are intentionally excluded; join back to stg_interaction
-      when segmentation by gender, age, city, etc. is needed.
+      User demographic fields are intentionally excluded; join to dim_user for segmentation.
     columns:
       - name: user_id
         description: Unique identifier for the user.
@@ -18,14 +17,8 @@ models:
           - not_null
       - name: author_id
         description: Unique identifier for the video's author.
-      - name: category_id
-        description: Category ID of the video at time of interaction.
-      - name: category_level
-        description: Hierarchy level of the category (1=root, 2=parent, 3=leaf).
-      - name: parent_id
-        description: Parent category ID.
-      - name: root_id
-        description: Root category ID.
+      - name: category_sk
+        description: Category key at time of interaction — join to dim_category on category_sk for resolved hierarchy and names.
       - name: exposed_at
         description: Timestamp when the user was exposed to the video.
       - name: watch_time_seconds

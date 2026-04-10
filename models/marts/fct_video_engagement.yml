@@ -6,7 +6,7 @@ models:
       Video-level engagement metrics aggregated from fct_interaction.
       One row per video. The primary model for answering "what makes a video engaging?"
       Contains all volume, interaction, and rate metrics from the PRD.
-      Join to dim_video for title/duration and dim_category for category hierarchy.
+      Join to dim_video for title/duration and dim_category on category_sk for category hierarchy.
     columns:
       - name: video_id
         description: Unique identifier for the video.
@@ -15,8 +15,8 @@ models:
           - unique
       - name: author_id
         description: Author of the video.
-      - name: category3_id
-        description: Leaf-level category FK — join to dim_category on category3_id for full hierarchy.
+      - name: category_sk
+        description: Category key — join to dim_category on category_sk for full hierarchy.
       - name: category3_name
         description: Leaf-level category name in English.
       - name: category2_name

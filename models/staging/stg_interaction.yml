@@ -18,14 +18,18 @@ models:
           - not_null
       - name: author_id
         description: Unique identifier for the video author.
-      - name: category_id
-        description: Category ID associated with the video at time of interaction.
       - name: category_level
         description: Hierarchy level of the category (1=root, 2=parent, 3=leaf).
-      - name: parent_id
-        description: Parent category ID.
-      - name: root_id
+      - name: category1_id
         description: Root category ID.
+      - name: category2_id
+        description: Parent category ID.
+      - name: category3_id
+        description: Leaf category ID.
+      - name: category_sk
+        description: >
+          Category key — concat(coalesce(category1_id,0), coalesce(category2_id,0),
+          coalesce(category3_id,0)). Matches dim_category.category_sk for a direct join.
       - name: exposed_at
         description: Timestamp when the user was exposed to the video (converted from Unix epoch).
       - name: p_hour

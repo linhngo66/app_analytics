@@ -48,6 +48,16 @@ renamed as (
         iff(cast("watch_time" as float) > 3, true, false) as is_effective_view
 
     from source
+),
+
+with_category_sk as (
+    select
+        *,
+        concat(
+            coalesce(category1_id, 0),
+            coalesce(category2_id, 0),
+            coalesce(category3_id, 0)) as category_sk
+    from renamed
 )
 
-select * from renamed
+select * from with_category_sk

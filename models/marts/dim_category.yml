@@ -3,24 +3,29 @@ version: 2
 models:
   - name: dim_category
     description: >
-      Category dimension with three-level hierarchy exposed as parent_id and root_id.
-      Use category_id to join from fact tables; use parent_id and root_id to roll up
-      to broader category groups for analysis.
+      Category dimension with a fully resolved three-level hierarchy. One row per category node
+      (at any level). category1_name_en, category2_name_en, and category3_name_en are all
+      resolved on each row; unused levels are NULL. Join from fact tables on category_sk.
     columns:
       - name: category_sk
-        description: Surrogate key for the category, generated from category3_id.
+        description: >
+          Natural key for the category node — concat(coalesce(category1_id,0),
+          coalesce(category2_id,0), coalesce(category3_id,0)). Matches category_sk
+          in fct_interaction for a direct join.
         data_tests:
           - not_null
           - unique
-      - name: category3_id
-        description: Leaf-level category natural key.
-      - name: category_name_en
-        description: Category name in English.
-      - name: category_name_cn
-        description: Category name in Chinese.
       - name: category_level
-        description: Hierarchy level (1=root, 2=parent, 3=leaf).
-      - name: parent_id
-        description: Parent category ID — one level up in the hierarchy.
-      - name: root_id
-        description: Root category ID — top of the hierarchy.
+        description: Hierarchy level of this node (1=root, 2=parent, 3=leaf).
+      - name: category1_id
+        description: Root category ID.
+      - name: category1_name_en
+        description: Root category name in English.
+      - name: category2_id
+        description: Parent category ID. NULL for level-1 nodes.
+      - name: category2_name_en
+        description: Parent category name in English. NULL for level-1 nodes.
+      - name: category3_id
+        description: Leaf category ID. NULL for level-1 and level-2 nodes.
+      - name: category3_name_en
+        description: Leaf category name in English. NULL for level-1 and level-2 nodes.
