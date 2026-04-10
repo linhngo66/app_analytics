@@ -1,0 +1,27 @@
+version: 2
+
+models:
+  - name: dim_user
+    description: >
+      User dimension derived from interaction events. One row per user.
+      Demographic attributes are taken from the most recent interaction record for that user.
+    columns:
+      - name: user_id
+        description: Unique identifier for the user.
+        data_tests:
+          - not_null
+          - unique
+      - name: gender
+        description: Gender of the user.
+      - name: age
+        description: Age of the user.
+      - name: mod_price
+        description: Modeled price segment of the user.
+      - name: fre_city
+        description: Most frequent city of the user.
+      - name: fre_community_type
+        description: Most frequent community type of the user.
+      - name: fre_city_level
+        description: City tier classification (e.g. 一线城市, 三线城市).
+      - name: last_active_at
+        description: Timestamp of the most recent interaction event for this user.

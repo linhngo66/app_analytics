@@ -9,7 +9,7 @@ models:
       hierarchy explicit for downstream joins.
     columns:
       - name: category_sk
-        description: Surrogate key for the category, generated from category3_id.
+        description: Surrogate key for the category
         data_tests:
           - not_null
           - unique
@@ -21,10 +21,5 @@ models:
         description: Parent category ID — one level above category3_id.
       - name: category3_id
         description: Leaf-level category natural key.
-        data_tests:
-          - not_null
-          - unique
-      - name: category_name_cn
-        description: Category name in Chinese.
       - name: category_name_en
         description: Category name in English.

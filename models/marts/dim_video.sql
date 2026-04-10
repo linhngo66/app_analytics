@@ -13,6 +13,7 @@ deduped as (
         category3_id,
         duration_seconds,
         title,
+        tag_name,
         row_number() over (
             partition by video_id
             order by exposed_at desc
@@ -28,6 +29,7 @@ select
     category2_id,
     category3_id,
     duration_seconds,
-    title
+    title,
+    tag_name
 from deduped
 where rn = 1

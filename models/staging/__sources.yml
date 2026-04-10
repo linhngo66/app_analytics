@@ -13,3 +13,7 @@ sources:
         description: >
           Category reference table with three-level hierarchy (root → parent → leaf).
           Includes both Chinese and English names.
+          Known data quality issue: 6 level-2 category_ids (233, 239, 338, 350, 354, 368)
+          have duplicate rows with conflicting category_name_en values. The Chinese name
+          (category_name_cn) is always correct. A defensive dedup is applied in stg_category
+          pending a fix at the source.

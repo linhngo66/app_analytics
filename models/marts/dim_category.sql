@@ -8,6 +8,5 @@ select
     category1_id,
     category2_id,
     category3_id,
-    category_name_cn,
     category_name_en
 from stg_category
